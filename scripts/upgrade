@@ -165,7 +165,7 @@ pushd $final_path
 		user_exists=$(ynh_exec_as $app php$phpversion bin/console aeneria:user:exist "$mail")
 		if [ $user_exists -eq 0 ]
 		then
-			if [ $mail -eq "admin_legacy" ]
+			if [ "$mail" != "admin_legacy" ]
 			then
 				user_pass=$(ynh_string_random)
 				ynh_exec_as $app php$phpversion bin/console aeneria:user:add "$mail" "$user_pass" -n
