@@ -136,7 +136,10 @@ pushd $final_path
 	do
 		mail=$(ynh_user_get_info --username=$username --key='mail')
 		user_pass=$(ynh_string_random)
-		ynh_exec_as $app php$phpversion bin/console aeneria:user:add "$mail" "$user_pass"
+		if [ "$mail" != "admin_legacy" ]
+		then
+			ynh_exec_as $app php$phpversion bin/console aeneria:user:add "$mail" "$user_pass"
+		fi
 	done
 
 	# Set admin user
